@@ -1,0 +1,19 @@
+.button {
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: silver;
+    color: dimgray;
+
+    &.size--sm {
+        font-size: 0.75rem
+    }
+
+    &.size--md {
+        font-size: 1rem;
+    }
+
+    &.size--lg {
+        font-size: 1.5rem;
+    }
+}
