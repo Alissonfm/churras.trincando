@@ -1,9 +1,10 @@
 import React from 'react'
 import _map from 'lodash/map'
-import Container from 'components/Container'
 import { useBbqStore } from 'hooks'
 import { MdDoneAll } from 'react-icons/md'
 import { FiTrash2 } from 'react-icons/fi'
+import Container from 'components/Container'
+import Page from 'components/Page'
 
 import { useSelector } from 'react-redux'
 
@@ -77,7 +78,7 @@ const EventDetails: React.FC = () => {
   const mappedGuests = _map(event.guests, (guest) => <GuestItem guest={guest} setPaid={() => setPaid(guest)} removeGuest={() => removeGuest(guest)} /> )
 
   return (
-    <div className="page">
+    <Page>
       <Container>
         <div className="event-details">
           <h3 className="date">{event.date}</h3>
@@ -90,13 +91,17 @@ const EventDetails: React.FC = () => {
           </div>
         </div>
         <div className="guest-list">
-          <h4>Participantes</h4>
+          <div className="list-header">
+            <span>NOME</span>
+            <span>Contribuição</span>
+            <span></span>
+          </div>
           <div className="list">
             {mappedGuests}
           </div>
         </div>
       </Container>
-    </div>
+    </Page>
   )
 }
 

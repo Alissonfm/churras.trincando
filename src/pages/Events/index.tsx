@@ -6,6 +6,7 @@ import { BBQ } from 'models'
 
 import { useBbqStore } from 'hooks'
 
+import Page from 'components/Page'
 import Container from 'components/Container'
 import Card from 'components/Card'
 
@@ -41,7 +42,7 @@ const Events: React.FC = () => {
   }, [])
 
   return (
-    <div className="page">
+    <Page>
       <Container className="events-container">
         {/* <Button onClick={handleAddEventClick}>Novo Churras</Button> */}
         <h2>Agenda de Churras</h2>
@@ -50,7 +51,7 @@ const Events: React.FC = () => {
           {mappedEvents()}
         </div>
       </Container>
-    </div>
+    </Page>
   )
 }
 

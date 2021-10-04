@@ -1,8 +1,69 @@
 
 .newEvent-container {
+  overflow: auto;
+
   .splited-fields {
-    & > * {
-      width: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .new-event-form {
+    .selected-guests, .available-guests {
+      .guest-list > * {
+        transition: all 0.35s;
+        cursor: pointer;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 1rem;
+        padding: 0.25rem 0.75rem;
+        border: 1px solid transparent;
+      }
+    }
+
+    .available-guests {
+      .guest-list > * {
+        border-color: gray;
+        background-color: transparent;
+
+        &:hover {
+          background-color: var(--accent-color);
+          color: var(--on-accent-color);
+          border-color: var(--accent-color)
+        }
+      }
+    }
+
+    .selected-guests {
+      .guest-list > * {
+        background-color: var(--accent-color);
+        color: var(--on-accent-color);
+        border-color: var(--accent-color);
+
+        &:hover {
+          background-color: crimson;
+          color: white;
+          border-color: crimson
+        }
+      }
+    }
+  }
+
+  .trigger-button {
+    margin-top: 1.5rem;
+    display: block;
+    margin: 1.5rem auto 0 auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .newEvent-container {
+    .splited-fields {
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      > * {
+        width: calc(50% - 0.5rem);
+      }
     }
   }
 }

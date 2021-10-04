@@ -2,11 +2,15 @@ import React from 'react'
 import { v4 as uuidv4 }  from 'uuid'
 import { useHistory } from 'react-router-dom'
 import _map from 'lodash/map'
+import { useBbqStore, useUserStore } from 'hooks'
 import Container from 'components/Container'
 import Button from 'components/Button'
 import Input from 'components/Input'
 import Textarea from 'components/Input/Textarea'
-import { useBbqStore, useUserStore } from 'hooks'
+
+import Page from 'components/Page'
+
+import './styles.scss'
 
 interface SLProps {
   onClick: any,
@@ -22,7 +26,7 @@ const SelectableList: React.FC<SLProps> = ({ onClick, list, className, title }) 
   return (
     <div className={className}>
       <h4>{title}</h4>
-      <div className="list">
+      <div className="guest-list">
         {mappedItens}
       </div>
     </div>
@@ -82,10 +86,10 @@ const NewEvent: React.FC = () => {
   }
 
   return (
-    <div className="page">
+    <Page>
       <Container className="newEvent-container">
         <h2>Novo Churras!!</h2>
-        <div>
+        <div className="new-event-form">
           <Input name="name" label="Nome do evento" onChange={changeName} />
           <Input name="date" label="Data do evento" placeholder="01/01/2021" onChange={changeDate} />
           <Input name="description" label="Descrição" onChange={changeDescription} />
@@ -98,10 +102,10 @@ const NewEvent: React.FC = () => {
           <SelectableList title="Convidados" list={gList.selected} onClick={onRemoveGuest} className="selected-guests" />
           <SelectableList title="Pessoas disponíveis" list={gList.ready} onClick={onSelectGuest} className="available-guests" />
 
-          <Button onClick={saveNewEvent}>Criar!</Button>
+          <Button className="trigger-button" onClick={saveNewEvent}>Criar!</Button>
         </div>
       </Container>
-    </div>
+    </Page>
   )
 }
 
