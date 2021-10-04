@@ -1,7 +1,9 @@
 import React from 'react'
 
-const Container: React.FC = ({ children }) => {
-    return <div className="container">{children}</div>
+import './styles.scss'
+
+const Container: React.FC<{children: any, className?: string}> = ({ children, className }) => {
+    return <div className={`container ${className ?? ''}`}>{children}</div>
 }
 
 export default Container;

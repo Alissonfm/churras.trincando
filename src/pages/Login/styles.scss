@@ -1,0 +1,88 @@
+.login {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  background-color: #FFD836;
+
+  .login-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    background-color: transparent;
+  }
+
+  .content { 
+    height: 62.5%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0px 1rem 1.5rem rgba(0,0,0,0.425);
+
+    .presentation {
+      img {
+        transform: scale(3);
+        filter: grayscale(1.5);
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    .form {
+      position: relative;
+      h2 {
+        text-transform: uppercase;
+        font-size: 2rem;
+      }
+
+      span {
+        color: crimson;
+        display: block;
+        padding-bottom: 1rem;
+      }
+
+      &[data-loading='true']::before {
+        content: "Entrando...";
+        position: absolute;
+        font-size: 2rem;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        background-color: white;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .presentation, .form {
+      padding: 2rem;
+    }
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+  .login {
+    .content {
+      flex-flow: row nowrap;
+      justify-content: space-around;
+      align-items: center;
+
+      .presentation {
+        width: 40%;
+      }
+
+      .form {
+        width: 60%;
+      }
+    }
+  }
+}

@@ -1,15 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import BBQ from 'models/bbq'
-import Guest from  'models/guest'
+import { BBQ, BbqStoreType } from 'models'
 
-interface BbqState {
-  events: Array<BBQ>
-  guests: Array<Guest>
-}
-
-const initialState: BbqState = {
-  events: [],
-  guests: []
+const initialState: BbqStoreType = {
+  events: []
 }
 
 const bbqSlice = createSlice({
@@ -22,9 +15,16 @@ const bbqSlice = createSlice({
     setEvents: (state, action: PayloadAction<Array<BBQ>>) => {
       return { ...state, events: action.payload }
     },
-    addGuest: (state, action: PayloadAction<Guest>) => {
-      return { ...state, guests: state.guests.concat([action.payload])}
-    }
+    selectEvent: (state, action: PayloadAction<BBQ>) => {
+      return { ...state, selectedEvent: action.payload }
+    },
+    updateEvent: (state, action: PayloadAction<BBQ>) => {
+      const eventFound: any = state.events.find((event) => event.id === action.payload.id)
+      const eCopy = state.events.concat([])
+      const index = eCopy.indexOf(eventFound)
+      eCopy.splice(index, 1, action.payload)
+      return { ...state, events: eCopy }
+    },
   }
 })
 

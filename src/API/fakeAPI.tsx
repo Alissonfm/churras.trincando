@@ -17,13 +17,13 @@ const fakeBackEnd = (requestData: RequestData): Promise<Response> => {
 
   switch (path) {
     case 'event/get-all': 
-      return request(200, 3000, EVENTS_MOCK)
+      return request(200, 1000, EVENTS_MOCK)
 
     case 'event/create':
       return request(200, 2000, payload)
 
     case 'guest/get-all':
-      return request(200, 3000, GUEST_MOCK)
+      return request(200, 1000, GUEST_MOCK)
     
     case 'guest/create':
       return request(200, 3000, payload)

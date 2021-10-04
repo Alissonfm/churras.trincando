@@ -1,68 +1,60 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { AppDispatch } from "store/"
-
 import service from 'service'
+import { UserStoreType, Guest } from 'models'
 
-interface userHookState {
-    user: string,
-    password: string,
-    logged: boolean,
-    logout: Function,
-    doLogin: Function
+import ls from 'helpers/localStorage'
+
+export interface userStoreHookProps {
+  store: UserStoreType,
+  login: Function,
+  logout: Function,
+  addGuest: Function
 }
 
-const initialUserHookState: userHookState = {
-    user: '',
-    password: '',
-    logged: false,
-    logout: () => null,
-    doLogin: () => null
-}
+const useUserStore = (): userStoreHookProps => {
+  const history = useHistory()
+  const dispatcher = useDispatch<AppDispatch>()
+  const store = useSelector((state: any) => state.user)
 
-// const syncronousQueryGuest = async () => await service.getGuests()
+  const handleLogin = (user: Guest) => {
+    dispatcher({ type: 'user/doLogin', payload: user })
+    history.push('/events')
+  }
 
-const useUserStore = (): userHookState => {
-    const dispatcher = useDispatch<AppDispatch>()
-    const history = useHistory()
+  const handlelogout = () => {
+    dispatcher({ type: 'user/logout' })
+    ls.remove('user')
+  }
 
-    const handleLogin = useCallback((userData: any) => {
-        dispatcher({ type: 'user/doLogin', payload: userData })
-        history.push('/events')
-    }, [dispatcher, history])
+  const setGuests = useCallback((guests: Array<Guest>) => dispatcher({ type: 'user/setGuests', payload: guests }), [dispatcher])
 
+  const handleRegister = (newGuest: Guest) => {
+    service.registerGuest(newGuest).then((response) => {
+      console.log("Guest register response: ", response)
+      dispatcher({ type: 'bbq/addGuest', payload: response.body})
+    })
+  }
 
-    const [state, setState] = useState(initialUserHookState)
-    const userStore = useSelector((state: any) => state.user)
-
-    useEffect(() => {
-        setState(() => ({ 
-            ...initialUserHookState, 
-            ...userStore,
-            doLogin: handleLogin
-        }))
-    }, [userStore, handleLogin])
-
-    const syncronousQuery = async () => {
-        const response = await service.getGuests()
-        console.log('WHY IT IS NOT ASYNC ', response)
+  useEffect(() => {
+    if(store.guests <= 0) {
+      service.getGuests().then((response) => {
+        setGuests(response.body)
+      })
     }
+    // eslint-disable-next-line
+  }, [])
 
-    useEffect(async () => {
-        let response
-        const syncronousQuery = async () => {
-            response = await service.getGuests()
-            console.log('WHY IT IS NOT ASYNC ', response)
-        }
-        syncronousQuery()
-        console.log('fuck?????')
-    }, [])
 
-    console.log('User store: ', userStore)
-
-    return state
+  return {
+    store,
+    login: handleLogin,
+    logout: handlelogout,
+    addGuest: handleRegister
+  }
 }
 
 export default useUserStore

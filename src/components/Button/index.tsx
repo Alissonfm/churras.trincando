@@ -12,7 +12,6 @@ const SIZE_CLASS: any = { small: 'size--sm', medium: 'size--md', large: 'size--l
 
 const Button: React.FC<buttonProps> = (props) => {
     const { variant, size = 'large', className, ...otherProps } = props
-    console.log('Variant: ', variant)
     const btnClass = `button ${SIZE_CLASS[size]} ${className}`
     return <button {...otherProps} className={btnClass} />
 }

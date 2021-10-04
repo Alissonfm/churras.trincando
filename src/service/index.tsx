@@ -1,7 +1,7 @@
 import { api, Response } from 'API/fakeAPI'
-import Guest from 'models/guest'
+import { Guest } from 'models'
 
-function auth(params: { email: string, guestList: Array<any> }): Promise<Response> {
+function auth(params: { email: string, guestList: any }): Promise<Response> {
   return api.POST('user/auth', params)
 }
 

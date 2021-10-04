@@ -1,3 +1,21 @@
 .inputWrapper {
-  
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 1rem 0;
+
+  label {
+    padding-bottom: 0.35rem;
+  }
+
+  .input {
+    background: none;
+    border: 2px solid dimgray;
+    padding: 0.75rem;
+    color: black;
+
+    &[data-error='true'] {
+      border-color: crimson;
+    }
+  }
 }

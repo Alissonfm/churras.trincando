@@ -1,7 +1,6 @@
 
 const get = (key: string): any => {
     const itemFound = localStorage.getItem(key)
-    console.log('Item found: ', itemFound)
     return itemFound ? JSON.parse(itemFound) : null
 }
 

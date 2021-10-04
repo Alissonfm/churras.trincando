@@ -1,19 +1,41 @@
 .button {
-    border: none;
-    padding: 0.5rem 1rem;
+  transition: all 0.35s;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+
+  &.size--sm {
+    font-size: 0.75rem
+  }
+
+  &.size--md {
     font-size: 1rem;
-    background-color: silver;
-    color: dimgray;
+  }
 
-    &.size--sm {
-        font-size: 0.75rem
-    }
+  &.size--lg {
+    font-size: 1.5rem;
+  }
 
-    &.size--md {
-        font-size: 1rem;
-    }
+  &:hover {
+    transform: scale(1.125);
+    opacity: 0.85;
+  }
 
-    &.size--lg {
-        font-size: 1.5rem;
-    }
+  &:active {
+    transform: scale(0.8);
+  }
+
+  &.isLoading::before {
+    content: '';
+    display: block;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    background-color: white;
+  }
 }

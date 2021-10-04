@@ -1,7 +1,9 @@
 const EVENT_MOCK = [
   {
+    id: 0,
     name: 'Churras de fim de ano',
     description: 'Nosso churras para celebrir o fim de mais um ano de muito sucesso!',
+    obs: '',
     date: '01/12/2021',
     suggestion: {
       normal: 20,
@@ -47,8 +49,10 @@ const EVENT_MOCK = [
     ],
   },
   {
+    id: 1,
     name: 'Niver do Alisson',
     description: 'Vamos comemorar o niver do Álisson',
+    obs: '',
     date: '21/04/2021',
     suggestion: {
       normal: 15,

@@ -1,18 +1,23 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import _map from 'lodash/map'
-import useUserStore from 'hooks/useUserStore'
-import { Login, Events } from 'pages/'
+import { useUserStore } from 'hooks'
+import { Login, Events, NewEvent, EventDetails } from 'pages/'
 
-const ROUTES = [
+const PATHS = [
   { path: '/', exact: true, component: Login },
-  { path: '/events', exact: true, component: Events}
+  { path: '/events', exact: true, component: Events},
+  { path: '/new-event', exact: true, component: NewEvent},
+  { path: '/event-details', exact: true, component: EventDetails },
 ]
 
 const Router: React.FC = () => {
-  const { logged } = useUserStore()
-  const mappedRoutes = _map(ROUTES, (rt: any) => <Route {...rt} />)
-  const checkAuth = logged ? () => <Redirect to="/" /> : () => <Redirect to="/events" />
+  const { store } = useUserStore()
+  console.log( 'user store: ', store)
+  const { logged } = store 
+
+  const mappedRoutes = _map(PATHS, (rt: any) => <Route {...rt} />)
+  const checkAuth = logged ? () => <Redirect to="/events" /> : () => <Redirect to="/" />
 
   return (
     <BrowserRouter>

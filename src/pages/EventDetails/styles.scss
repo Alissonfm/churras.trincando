@@ -1,0 +1,17 @@
+.event-details {
+  .guest-list {
+    .list {
+      display: flex;
+      flex-flow: column nowrap;
+    
+      .list-item {
+        border-color: silver;
+        padding: 1rem;
+        border-radius: 0.5rem;
+
+        display: flex;
+        flex-flow: row wrap;
+      }
+    }
+  }
+}
