@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux'
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import bbqReducer from './bbqSlice'
 import userReducer from './userSlice'
@@ -18,5 +17,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
-export const useDispatcher = () => useDispatch<AppDispatch>()

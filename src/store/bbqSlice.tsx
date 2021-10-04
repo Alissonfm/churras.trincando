@@ -1,215 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import BBQ from 'models/bbq'
-
-const MOCK: Array<BBQ> = [
-  {
-    name: 'Niver do Gui',
-    description: 'Churras para comemorar o niver do Guilherme',
-    date: '01/12/2020',
-    suggestedValue: 20,
-    guests: [
-      {
-        name: 'Alice',
-        email: 'alice@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-      {
-        name: 'Beto',
-        email: 'beto@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Diego B.',
-        email: 'diego-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Ana',
-        email: 'Ana-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Michele',
-        email: 'michele@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Carolina',
-        email: 'carolina-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Josiane',
-        email: 'josiane@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-    ],
-  },
-  {
-    name: 'Niver do Gui',
-    description: 'Churras para comemorar o niver do Guilherme',
-    date: '01/12/2020',
-    suggestedValue: 20,
-    guests: [
-      {
-        name: 'Alice',
-        email: 'alice@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-      {
-        name: 'Beto',
-        email: 'beto@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Diego B.',
-        email: 'diego-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Ana',
-        email: 'Ana-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Michele',
-        email: 'michele@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Carolina',
-        email: 'carolina-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Josiane',
-        email: 'josiane@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-    ],
-  },
-  {
-    name: 'Niver do Gui',
-    description: 'Churras para comemorar o niver do Guilherme',
-    date: '01/12/2020',
-    suggestedValue: 20,
-    guests: [
-      {
-        name: 'Alice',
-        email: 'alice@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-      {
-        name: 'Beto',
-        email: 'beto@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Diego B.',
-        email: 'diego-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Ana',
-        email: 'Ana-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Michele',
-        email: 'michele@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Carolina',
-        email: 'carolina-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Josiane',
-        email: 'josiane@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-    ],
-  },
-  {
-    name: 'Niver do Gui',
-    description: 'Churras para comemorar o niver do Guilherme',
-    date: '01/12/2020',
-    suggestedValue: 20,
-    guests: [
-      {
-        name: 'Alice',
-        email: 'alice@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-      {
-        name: 'Beto',
-        email: 'beto@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Diego B.',
-        email: 'diego-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Ana',
-        email: 'Ana-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Michele',
-        email: 'michele@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Carolina',
-        email: 'carolina-b@teste.com.br',
-        contribution: 20,
-        paid: false,
-      },
-      {
-        name: 'Josiane',
-        email: 'josiane@teste.com.br',
-        contribution: 20,
-        paid: true,
-      },
-    ],
-  },
-];
+import Guest from  'models/guest'
 
 interface BbqState {
   events: Array<BBQ>
+  guests: Array<Guest>
 }
 
 const initialState: BbqState = {
-  events: MOCK
+  events: [],
+  guests: []
 }
 
 const bbqSlice = createSlice({
@@ -217,7 +17,13 @@ const bbqSlice = createSlice({
   initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<BBQ>) => {
-      state.events.concat([action.payload])
+      return { ...state, events: state.events.concat([action.payload]) }
+    },
+    setEvents: (state, action: PayloadAction<Array<BBQ>>) => {
+      return { ...state, events: action.payload }
+    },
+    addGuest: (state, action: PayloadAction<Guest>) => {
+      return { ...state, guests: state.guests.concat([action.payload])}
     }
   }
 })

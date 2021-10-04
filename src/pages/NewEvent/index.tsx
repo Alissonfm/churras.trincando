@@ -1,13 +1,13 @@
 import React from 'react'
 
 import _map from 'lodash/map'
-import useBbqStore from 'helpers/useBbqStore'
+import useBbqStore from 'hooks/useBbqStore'
 
 import Container from 'components/Container'
 import Card from 'components/Card'
 import Button from 'components/Button'
 
-const Events: React.FC = () => {
+const NewEvent: React.FC = () => {
   const events = useBbqStore()
 
   const buttonClick = () => {
@@ -25,4 +25,4 @@ const Events: React.FC = () => {
   )
 }
 
-export default Events
+export default NewEvent

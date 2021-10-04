@@ -1,22 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Guest from 'models/guest'
+interface UserStore {
+  email: string,
+  logged: boolean,
+  user?: Guest,
+}
 
-
-const initialState: Guest = {
-  name: "",
-  email: ""
+const initialState: UserStore = {
+  email: '',
+  logged: false,
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    doLogin: (state, action: PayloadAction<Guest>) => {
-      state = action.payload
+    doLogin: (state, action: PayloadAction<UserStore>) => {
+      return { ...action.payload, logged: true }
     },
-    logout: (state) => {
-      state = initialState
-    }
+    logout: () => initialState
   }
 })
 
